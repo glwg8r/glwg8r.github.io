@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>90s Hacker OS Background</title>
+    <title>GlwG8r Nexus</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&display=swap');
         
@@ -235,6 +235,14 @@
             95% { opacity: 0.3; }
         }
         
+        .sapphire-skull-icon {
+            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 30%, #a855f7 60%, #4c1d95 100%) !important;
+            border: 1px outset #4c1d95 !important;
+            color: #ffffff !important;
+            text-shadow: 0 0 8px #7c3aed;
+            box-shadow: 0 0 12px rgba(124, 58, 237, 0.4);
+        }
+        
         .red-diamond-icon {
             background: linear-gradient(135deg, #cc3333 0%, #ff6666 50%, #cc3333 100%) !important;
             border: 1px outset #cc3333 !important;
@@ -325,6 +333,64 @@
     </style>
 </head>
 <body>
+    <script>
+        // Update time every second
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        
+        // Calculate moon phase
+        function getMoonPhase() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            
+            // Simple moon phase calculation
+            const c = Math.floor((year - 1900) / 100);
+            const e = 2 * (year - 1900 - 100 * c);
+            const jd = 365.25 * (year - 1900) + 30.6 * month + day - 0.75 * c + 1;
+            const b = (jd - 2451550.1) / 29.530588853;
+            const phase = (b - Math.floor(b)) * 29.530588853;
+            
+            if (phase < 1.84566) return { emoji: '🌑', name: 'New Moon' };
+            else if (phase < 5.53699) return { emoji: '🌒', name: 'Waxing Crescent' };
+            else if (phase < 9.22831) return { emoji: '🌓', name: 'First Quarter' };
+            else if (phase < 12.91963) return { emoji: '🌔', name: 'Waxing Gibbous' };
+            else if (phase < 16.61096) return { emoji: '🌕', name: 'Full Moon' };
+            else if (phase < 20.30228) return { emoji: '🌖', name: 'Waning Gibbous' };
+            else if (phase < 23.99361) return { emoji: '🌗', name: 'Last Quarter' };
+            else if (phase < 27.68493) return { emoji: '🌘', name: 'Waning Crescent' };
+            else return { emoji: '🌑', name: 'New Moon' };
+        }
+        
+        // Get user location and weather
+        async function getLocationAndWeather() {
+            // Temperature functionality removed
+            return;
+        }
+        
+        // Initialize everything
+        function init() {
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            const moonPhase = getMoonPhase();
+            document.getElementById('moon-emoji').textContent = moonPhase.emoji;
+            document.getElementById('moon-phase').textContent = moonPhase.name;
+            
+            getLocationAndWeather();
+        }
+        
+        // Start when page loads
+        window.addEventListener('load', init);
+    </script>
     <div class="desktop">
         <div class="gator-backdrop"></div>
         <div class="grid-lines"></div>
@@ -389,6 +455,11 @@
             <div class="icon-label">my store</div>
         </a>
         
+        <a href="https://jemstudios.drr.ac/" target="_blank" class="desktop-icon" style="bottom: 80px; left: 80px; text-decoration: none;">
+            <div class="icon-image sapphire-skull-icon">💎</div>
+            <div class="icon-label">jem studios</div>
+        </a>
+        
         <a href="https://cinnabar.drr.ac" target="_blank" class="desktop-icon" style="bottom: 80px; right: 80px; text-decoration: none;">
             <div class="icon-image red-diamond-icon">♦️</div>
             <div class="icon-label">cinnabar</div>
@@ -410,15 +481,11 @@
             <div class="location-info">
                 <div class="info-item">
                     <span>🕐</span>
-                    <span id="current-time">12:47 AM</span>
+                    <span id="current-time">Loading...</span>
                 </div>
                 <div class="info-item">
-                    <span>🌡️</span>
-                    <span>38°F</span>
-                </div>
-                <div class="info-item">
-                    <span class="moon-phase">🌘</span>
-                    <span>Waning Crescent</span>
+                    <span id="moon-emoji" class="moon-phase">🌘</span>
+                    <span id="moon-phase">Loading...</span>
                 </div>
             </div>
             <div style="margin-left: 40px;" class="status-item">
