@@ -98,11 +98,22 @@
             animation: glyph-flicker 3s ease-in-out infinite;
         }
         
-        @keyframes glyph-flicker {
-            0%, 100% { opacity: 0.1; }
-            25% { opacity: 0.3; }
-            50% { opacity: 0.15; }
-            75% { opacity: 0.25; }
+        @keyframes rune-appear {
+            0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            20% { opacity: 0.3; transform: scale(1.1) rotate(15deg); }
+            50% { opacity: 0.2; transform: scale(1) rotate(0deg); }
+            80% { opacity: 0.25; transform: scale(0.95) rotate(-10deg); }
+            100% { opacity: 0; transform: scale(0.7) rotate(5deg); }
+        }
+        
+        .hypnotic-rune {
+            position: absolute;
+            color: #00ff41;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41;
+            pointer-events: none;
+            animation: rune-appear ease-in-out;
         }
         
         .scan-lines {
@@ -396,13 +407,7 @@
         <div class="grid-lines"></div>
         <div class="scan-lines"></div>
         
-        <div class="glyph-overlay">
-            <div class="nordic-glyph" style="top: 15%; left: 8%;">ᚱ</div>
-            <div class="nordic-glyph" style="top: 25%; right: 15%; animation-delay: 1s;">ᚦ</div>
-            <div class="nordic-glyph" style="bottom: 30%; left: 12%; animation-delay: 2s;">ᚠ</div>
-            <div class="nordic-glyph" style="top: 40%; right: 8%; animation-delay: 0.5s;">ᚢ</div>
-            <div class="nordic-glyph" style="bottom: 20%; right: 25%; animation-delay: 1.5s;">ᚺ</div>
-            <div class="nordic-glyph" style="top: 60%; left: 20%; animation-delay: 2.5s;">ᛏ</div>
+        <div class="glyph-overlay" id="runic-field">
         </div>
         
         <div class="central-symbol">◊</div>
